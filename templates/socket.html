@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     const btn = document.getElementById('btn');
     const content = document.getElementById('place');
+    const org = document.getElementById('org');
 
     btn.addEventListener('click' , function() {
         // 音声認識をスタート
@@ -27,11 +28,11 @@ $(document).ready(function() {
         
         const uttr = new SpeechSynthesisUtterance(msg.data)
         uttr.lang = "en-US"
-        speechSynthesis.speak(uttr)
+        //speechSynthesis.speak(uttr)
         
         setTimeout(function(){
-            $('#place').empty();
-        }, 5000);
+            //$('#place').empty();
+        }, 10000);
     });
 
     speech.onresult = function(e) {
@@ -41,7 +42,8 @@ $(document).ready(function() {
             console.log(e);
             console.log(autotext);
             socket.emit('receive_content', {data: autotext});
-            // content.innerHTML += '<div>'+ autotext +'</div>';
+            $('#org').empty();
+            org.innerHTML += '<div>'+ autotext +'</div>';
         }
 
     speech.onend = () => { 
@@ -56,7 +58,8 @@ $(document).ready(function() {
 
 {% block body %}
 
-<font size="5" color="red"><div id="place">testest</div></font>
+<font size="5"><div id="org"><span style="color:black" >日本語</span></div></font>
+<font size="4"><span style="color:rgb(108, 81, 138)"><div id="place">English Subtitle</div></span></font>
 <br><br><br>
 <button id="btn">start</button>
 

@@ -1,0 +1,57 @@
+name: speech
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies:
+  - brotlipy=0.7.0=py37h2bbff1b_1003
+  - ca-certificates=2022.2.1=haa95532_0
+  - certifi=2021.10.8=py37haa95532_2
+  - cffi=1.15.0=py37h2bbff1b_1
+  - charset-normalizer=2.0.4=pyhd3eb1b0_0
+  - click=8.0.4=py37haa95532_0
+  - colorama=0.4.4=pyhd3eb1b0_0
+  - cryptography=36.0.0=py37h21b164f_0
+  - dataclasses=0.8=pyh6d0b6a4_7
+  - flask=1.1.2=py_0
+  - importlib-metadata=4.8.2=py37haa95532_0
+  - itsdangerous=2.0.1=pyhd3eb1b0_0
+  - janome=0.4.2=pyhd8ed1ab_0
+  - jinja2=3.0.2=pyhd3eb1b0_0
+  - markupsafe=2.0.1=py37h2bbff1b_0
+  - openssl=1.1.1m=h2bbff1b_0
+  - pip=21.2.4=py37haa95532_0
+  - pycparser=2.21=pyhd3eb1b0_0
+  - pyopenssl=22.0.0=pyhd3eb1b0_0
+  - pysocks=1.7.1=py37_1
+  - python=3.7.11=h6244533_0
+  - python-engineio=3.13.2=py_0
+  - python-socketio=4.6.0=py_0
+  - requests=2.27.1=pyhd3eb1b0_0
+  - setuptools=58.0.4=py37haa95532_0
+  - six=1.16.0=pyhd3eb1b0_1
+  - sqlite=3.38.0=h2bbff1b_0
+  - typing_extensions=3.10.0.2=pyh06a4308_0
+  - urllib3=1.26.8=pyhd3eb1b0_0
+  - vc=14.2=h21ff451_1
+  - vs2015_runtime=14.27.29016=h5e58377_2
+  - werkzeug=2.0.3=pyhd3eb1b0_0
+  - wheel=0.37.1=pyhd3eb1b0_0
+  - win_inet_pton=1.1.0=py37haa95532_0
+  - wincertstore=0.2=py37haa95532_2
+  - zipp=3.7.0=pyhd3eb1b0_0
+  - pip:
+    - chardet==3.0.4
+    - flask-socketio==1.2
+    - googletrans==3.0.0
+    - h11==0.9.0
+    - h2==3.2.0
+    - hpack==3.0.0
+    - hstspreload==2021.12.1
+    - httpcore==0.9.1
+    - httpx==0.13.3
+    - hyperframe==5.2.0
+    - idna==2.10
+    - rfc3986==1.5.0
+    - sniffio==1.2.0
+

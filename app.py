@@ -1,12 +1,14 @@
 from flask import Flask, request, render_template
 from flask_socketio import SocketIO, emit
+from googletrans import Translator
+from janome.tokenizer import Tokenizer
+
 
 # 翻訳系
-from googletrans import Translator
-translator = Translator()
+#translator = Translator()
+translator = Translator(service_urls=['translate.googleapis.com'])
 
 # 形態素解析　分かち書き用
-from janome.tokenizer import Tokenizer
 t = Tokenizer()
 
 # Flask
@@ -15,34 +17,33 @@ app.config['SECRET_KEY'] = 'hogefuga'
 socketio = SocketIO(app, async_mode=None)
 
 class SiteInfo:
-    title = 'ページタイトル'
+    title = '音声翻訳'
 
 
 # 音声入力を受け取る
-@app.route('/websocket',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def websocket():
     
     return render_template('socket.html',
-                           async_mode = socketio.async_mode,
+                           #async_mode = socketio.async_mode, v1.2では不要
                            title = SiteInfo.title,
                            )
 
 # scketioの設定
 @socketio.on('receive_content', namespace='/demo') # scket.html側の/demoからreceive_contentに対して送られてきた場合
 def send_content(sent_data):
+
+    get_text = sent_data['data'].encode('latin1').decode('utf-8')
+    print(get_text)
     
     # 分かち書きを実行して入力が2つ以上の単語の時に英訳して発生させる
-    #print(t.tokenize(sent_data['data']).surface)
-    for token in t.tokenize(sent_data['data']):
-        print(token.surface)
-    token_list = [tmp for tmp in t.tokenize(sent_data['data'])]
+    #for token in t.tokenize(get_text):
+    #    print(token.surface)
+    token_list = [tmp for tmp in t.tokenize(get_text)]
 
     if len(token_list) > 1:
-
-        trans_en = translator.translate(sent_data['data'])
-
-        content = '%s' % trans_en.text # socket.html側で{data:content}としているのでこうなる。
-        
+        trans_en = translator.translate(get_text)
+        content = trans_en.text 
         # データをsocket.htmlのmy_contentに送信
         emit('my_content', {'data': content}, broadcast=False)
 
